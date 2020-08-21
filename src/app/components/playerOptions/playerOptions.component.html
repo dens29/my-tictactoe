@@ -1,0 +1,68 @@
+
+<body>
+    <div style="width:800px; margin:0 auto;" *ngIf="!loadBoard && !loadSingleUser">
+  <h2>WELCOME TO...</h2> 
+  
+  <h1 text-align='right'>TIC TAC TOE</h1>
+  
+  <h2>How do you want to play?</h2>
+  
+  <p>Choose an option: {{title}}</p>
+   
+  <input name="type" [(ngModel)]="type" type="radio" [value]="1" [checked]="options"/> Single player
+  <input name="type" [(ngModel)]="type" type="radio" [value]="0" [checked]="!options"/> Two players
+    
+  <h3 *ngIf="type == 1">
+    <form [formGroup] = "formdata" (ngSubmit) = "onClickSubmit(formdata.value)" >
+       <input type = "text" class = "fortextbox" placeholder = "Frist Player" 
+          formControlName="nameplayerone">
+       <br/>
+       <input type = "submit" class = "forsubmit" value = "Add Name">
+       <br/>
+       <br/>
+       <p>
+        First Player is : {{nameplayerone}}
+      </p>
+      <button 
+      type="submit" 
+      class="btn btn-primary"
+      (click)="redirectPage('singleUser')">Submit</button>
+    </form>
+  </h3>
+  <h3 *ngIf="type == 0">
+    <form [formGroup] = "formdata" (ngSubmit) = "onClickSubmit(formdata.value)" >
+       <input type = "text" class = "fortextbox" placeholder = "Frist Player" 
+          formControlName="nameplayerone">
+       <br/>
+       <input type = "submit" class = "forsubmit" value = "Add Name">
+       <br/>
+       
+       <p>
+        First Player is : {{nameplayerone}}
+      </p>
+    
+    </form>
+  <form [formGroup] = "formdatanew" (ngSubmit) = "onClickSubmitNew(formdatanew.value)" >
+      <input type = "text" class = "fortextbox" placeholder = "Second Player" 
+         formControlName="nameplayertwo">
+      <br/>
+      <input type = "submit" class = "forsubmit" value = "Add Name">
+      <p>
+        Second Player is : {{nameplayertwo}}
+      </p>
+      <button 
+      type="submit" 
+      class="btn btn-primary"
+      (click)="redirectPage('twoUsers')">Submit</button>
+      
+    </form>
+  </h3>
+  </div>
+  <div *ngIf="loadBoard">
+    <board></board>
+  </div>
+  <div *ngIf="loadSingleUser">
+    <singlePlayer></singlePlayer>
+  </div>
+  </body>
+   
